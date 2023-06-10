@@ -1,6 +1,5 @@
 "use client";
-import React, { useState } from "react";
-
+import React, { useCallback, useState } from "react";
 const QUESTIONS = ["Question 1?", "Question 2?", "Question 3?"];
 const cardStyle = {
   display: "flex",
@@ -14,6 +13,24 @@ const pageStyle = {
   justifyContent: "center",
   flex: 1,
 } as const;
+
+const Card = ({
+  question,
+  onAnswer,
+}: {
+  question: string;
+  onAnswer: (answer: string) => void;
+}) => {
+  const answerYes = useCallback(() => onAnswer("Yes"), [onAnswer]);
+  const answerNo = useCallback(() => onAnswer("No"), [onAnswer]);
+  return (
+    <div style={cardStyle}>
+      <h2>{question}</h2>
+      <button onClick={answerYes}>Yes</button>
+      <button onClick={answerNo}>No</button>
+    </div>
+  );
+};
 const Survey = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
@@ -26,11 +43,10 @@ const Survey = () => {
   return (
     <div style={pageStyle}>
       {currentQuestionIndex < QUESTIONS.length ? (
-        <div style={cardStyle}>
-          <h2>{QUESTIONS[currentQuestionIndex]}</h2>
-          <button onClick={() => handleAnswer("Yes")}>Yes</button>
-          <button onClick={() => handleAnswer("No")}>No</button>
-        </div>
+        <Card
+          question={QUESTIONS[currentQuestionIndex]}
+          onAnswer={handleAnswer}
+        />
       ) : (
         <div>
           <h2>
