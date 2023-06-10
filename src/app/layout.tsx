@@ -1,6 +1,9 @@
 "use client";
 import "./globals.css";
 import { ChakraProvider } from "@chakra-ui/react";
+import { Rubik } from "next/font/google";
+
+const rubik = Rubik({ subsets: ["latin"] });
 
 export default function RootLayout({
   children,
@@ -9,7 +12,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className={rubik.className}>
         <ChakraProvider>{children}</ChakraProvider>
       </body>
     </html>
