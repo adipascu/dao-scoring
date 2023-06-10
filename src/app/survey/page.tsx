@@ -2,7 +2,18 @@
 import React, { useState } from "react";
 
 const QUESTIONS = ["Question 1?", "Question 2?", "Question 3?"];
-const cardStyle = {} as const;
+const cardStyle = {
+  display: "flex",
+  flexDirection: "column",
+} as const;
+
+const pageStyle = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  flex: 1,
+} as const;
 const Survey = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
@@ -13,7 +24,7 @@ const Survey = () => {
   };
 
   return (
-    <>
+    <div style={pageStyle}>
       {currentQuestionIndex < QUESTIONS.length ? (
         <div style={cardStyle}>
           <h2>{QUESTIONS[currentQuestionIndex]}</h2>
@@ -34,7 +45,7 @@ const Survey = () => {
           </ul>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
