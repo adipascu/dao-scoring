@@ -1,4 +1,12 @@
 "use client";
+import {
+  Card as ChakraCard,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Text,
+  Button,
+} from "@chakra-ui/react";
 import React, { useCallback, useState } from "react";
 const QUESTIONS = ["Question 1?", "Question 2?", "Question 3?"];
 const cardStyle = {
@@ -24,11 +32,13 @@ const Card = ({
   const answerYes = useCallback(() => onAnswer("Yes"), [onAnswer]);
   const answerNo = useCallback(() => onAnswer("No"), [onAnswer]);
   return (
-    <div style={cardStyle}>
-      <h2>{question}</h2>
-      <button onClick={answerYes}>Yes</button>
-      <button onClick={answerNo}>No</button>
-    </div>
+    <ChakraCard style={cardStyle}>
+      <CardBody>
+        <Text>{question}</Text>
+        <Button onClick={answerYes}>Yes</Button>
+        <Button onClick={answerNo}>No</Button>
+      </CardBody>
+    </ChakraCard>
   );
 };
 const Survey = () => {
